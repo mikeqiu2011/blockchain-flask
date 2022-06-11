@@ -8,6 +8,9 @@ class Blockchain:
         self.chain = []
         self.create_block(proof=1, previous_hash='0')  # create genisis block
 
+    def get_chain(self):
+        return self.chain
+
     def create_block(self, proof, previous_hash):
         block = {
             'index': len(self.chain) + 1,
@@ -27,9 +30,9 @@ class Blockchain:
 
         while True:
             hash_value = self.get_hash(new_proof, previous_proof)
-            print(f'hash value is:', hash_value)
 
             if hash_value[:4] == '0000':
+                print(f'hash value is:', hash_value)
                 return new_proof
 
             new_proof += 1

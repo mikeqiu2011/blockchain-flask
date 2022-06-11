@@ -11,9 +11,23 @@ def mine_block():
     resp = {
         'message': 'Congratulations, you just mined a block!',
         'index': block['index'],
-        'timestamp': block['timestampe'],
+        'timestamp': block['timestamp'],
         'proof': block['proof'],
-        'previous_hash': block['previous_hash']
+        'prev_hash': block['prev_hash']
     }
 
     return jsonify(resp), 201
+
+
+@app.route('/chain', methods=['GET'])
+def get_chain():
+    resp = {
+        'chain': blockchain.get_chain(),
+        'length': len(blockchain.get_chain())
+    }
+
+    return jsonify(resp), 200
+
+
+# run the app
+app.run(host='0.0.0.0', port=5000)
